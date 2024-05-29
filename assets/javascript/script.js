@@ -19,11 +19,6 @@ document.addEventListener('DOMContentLoaded', function () {
     celularInput.addEventListener('input', function () {
         this.value = aplicarMascaraCelular(this.value);
     });
-
-    var rgInput = document.getElementById('rg');
-
-    rgInput.addEventListener('input', function () {
-    });
 });
 
 // https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Guide/Regular_Expressions
