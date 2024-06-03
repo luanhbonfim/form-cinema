@@ -19,6 +19,15 @@ document.addEventListener('DOMContentLoaded', function () {
     celularInput.addEventListener('input', function () {
         this.value = aplicarMascaraCelular(this.value);
     });
+
+    // Captura o evento de submissão do formulário
+    document.getElementById('cadastro-usuario').addEventListener('submit', function(event) {
+        // Redireciona para a página de compra
+        window.location.href = "purchase.html";
+
+        // Evita a submissão padrão do formulário (recarregar a página)
+        event.preventDefault();
+    });
 });
 
 // https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Guide/Regular_Expressions
