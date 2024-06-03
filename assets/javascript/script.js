@@ -3,6 +3,8 @@ document.addEventListener('DOMContentLoaded', function () {
     var tipoDocumentoSelect = document.getElementById('tipo-documento');
     var cepInput = document.getElementById('cep');
     var celularInput = document.getElementById('celular');
+    var cidadeInput = document.getElementById('cidade'); // Adicionando referência ao input da cidade
+    var estadoInput = document.getElementById('estado'); // Adicionando referência ao input do estado
 
     tipoDocumentoSelect.addEventListener('change', function () {
         aplicarMascaraDocumento(documentoInput, this.value);
@@ -13,6 +15,8 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     cepInput.addEventListener('input', function () {
+        // Ao alterar o CEP, preenche automaticamente a cidade e o estado
+        preencherCidadeEstadoPorCEP(this.value);
         this.value = aplicarMascaraCEP(this.value);
     });
 
@@ -28,6 +32,17 @@ document.addEventListener('DOMContentLoaded', function () {
         // Evita a submissão padrão do formulário (recarregar a página)
         event.preventDefault();
     });
+
+    // Função para preencher cidade e estado com base no CEP
+    function preencherCidadeEstadoPorCEP(cep) {
+        fetch(`https://viacep.com.br/ws/${cep}/json/`)
+            .then(response => response.json())
+            .then(data => {
+                cidadeInput.value = data.localidade; // Preenche a cidade
+                estadoInput.value = data.uf; // Preenche o estado
+            })
+            .catch(error => console.error('Erro ao buscar CEP:', error));
+    }
 });
 
 // https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Guide/Regular_Expressions
